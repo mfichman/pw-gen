@@ -1,0 +1,33 @@
+#!/usr/bin/env python
+import hashlib, sys
+
+
+ALPHABET = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+def base62_encode(num, alphabet=ALPHABET):
+    """Encode a number in Base X
+
+    `num`: The number to encode
+    `alphabet`: The alphabet to use for encoding
+    """
+    if (num == 0):
+        return alphabet[0]
+    arr = []
+    base = len(alphabet)
+    while num:
+        rem = num % base
+        num = num // base
+        arr.append(alphabet[rem])
+    arr.reverse()
+    return ''.join(arr)
+
+if len(sys.argv) < 2:
+    print("Usage: gen.py DOMAIN PASSPHRASE")
+
+
+site = sys.argv[1] 
+phrase = " ".join(sys.argv[2:])
+digest = hashlib.sha256(phrase+site).hexdigest()
+num = long(digest, 16)
+base62 = base62_encode(num)
+final = base62[:8]
+print(final)
