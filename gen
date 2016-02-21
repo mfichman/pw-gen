@@ -30,4 +30,7 @@ digest = hashlib.sha256(phrase+site).hexdigest()
 num = long(digest, 16)
 base62 = base62_encode(num)
 final = base62[:8]
+print("Hash: " + digest)
+print("BigInt: " + str(num))
+print("Base62: " + base62)
 print(final)

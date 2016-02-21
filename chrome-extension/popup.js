@@ -26,6 +26,9 @@ function onLoad() {
         var text = passphrase+domain;
         var hash = CryptoJS.SHA256(passphrase+domain).toString();
         var result = Base62.encode(hash).substring(0, 8);
+        console.log("Hash: " + hash);
+        console.log("BigInt: " + BigInteger.parse(hash, 16).toString()) 
+        console.log("Base62: " + result);
 
         input.hide();
         output.html(domain + "&nbsp;" + result);
